@@ -11,7 +11,6 @@
         android:background="@android:color/holo_blue_light"
         android:weightSum="1">
         <Button
-            style=?andori
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,6 +21,6 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="388dp"
-        android:layout_height="464dp"
+        android:layout_height="469dp"
         tools:context=".MapsActivity" />
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -19,13 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private LocationManager locationmanager;
-    private boolean isGPSEnabled = false;
-    private boolean isNetworkEnabled = false;
 
-
-    private static final long MIN_TIME_BW_UPDATES = 1000*5;
-    private static final float MIN_DISTANCE_CHANGE_FOR_UPDATE = 0.0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,51 +51,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(birth).title("LA JOLLA,CALIFORNIA"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(birth));
 
-        //assignment 2
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager2)
 
+        if(ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)
+                !=PackageManager.PERMISSION_GRANTED)
+        {
+            Log.d("Mymapapp","failed fine location permission check");
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},2);
 
-    }
-
-
-    public void getLocation()
-    try {
-        locationmanager = (LocationManager)getSystemService(LOCATION_SERVICE);
-        //getGPS Status
-        isGPSEnabled = locationmanager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if(isGPSEnabled) Log.d("MyMaps","getLocation:GPS is enabled");
-
-        //get network status
-        //you do this
-
-        if(!isGPSEnabled&&!isNetworkEnabled)
-            Log.d("MyMap","getLocation:No Provider is enabled!");
-        else {
-            if (isNetworkEnabled) {
-
-                locationmanager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,MIN_TIME_BW_UPDATES,MIN_DISTANCE_CHANGE_FOR_UPDATE,locationListenerNEtwork);
-            }
-            if (isGPSEnabled) {
-
-                locationmanager.requestLocationUpdates(LocationManager.GPS_PROVIDER,MIN_TIME_BW_UPDATES,MIN_DISTANCE_CHANGE_FOR_UPDATE,locationListenerGPS);
-            }
         }
-    }
-    catch(Exception e)
-    {
-        Log.d("MyMaps","Caught exception in getLocation");
-        e.printStackTrace();
+        if(ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)
+                !=PackageManager.PERMISSION_GRANTED)
+        {
+            Log.d("Mymapapp","failed coarse location permission check");
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},2);
+
+        }
+        if((ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)
+                ==PackageManager.PERMISSION_GRANTED) || (ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)
+                ==PackageManager.PERMISSION_GRANTED))
+        {
+            mMap.setMyLocationEnabled(true);
+        }
 
     }
 
 
 
 
-    Location
-
-
-
-
-    public void changeView(View v)
-        Log.d("")
 }
+
+

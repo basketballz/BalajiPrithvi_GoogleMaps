@@ -10,12 +10,65 @@
         android:layout_height="wrap_content"
         android:background="@android:color/holo_blue_light"
         android:weightSum="1">
+
         <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
+            style="?android:attr/buttonStyleSmall"
+
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="View"
+            android:id="@+id/button"
+            android:layout_gravity="right"
+            android:onClick="changeView"
+            android:layout_weight="0.51"
+
+             />
+
+        <Button
+            android:id="@+id/button_TrkMe"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:onClick="trackMyLocation"
+            android:text="Trk"
+            android:layout_weight="0.45"/>
+
+        <Button
+            android:id="@+id/button_Clear"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:onClick="clearMarkers"
+            android:text="Clr" />
     </LinearLayout>
+
+
+    <!-- This linear layout is for the search button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_light"
+        android:weightSum="1">
+        <EditText
+
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_addr"
+            android:layout_weight="0.97"/>
+
+
+        <Button
+            android:id="@+id/button_search"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:onClick="onSearch"
+            android:text="Srch1"></Button>
+    </LinearLayout>
+
     <!-- This is for the map -->
     <fragment
         android:id="@+id/map"
